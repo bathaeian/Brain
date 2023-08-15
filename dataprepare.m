@@ -6,7 +6,7 @@ file_rest = gunzip(rest_fn);
 if char(string(table2cell(COBREphenotypicdata(i,5))))=='Control' 
 dest=['Control' filesep subj2 '.nii']
 else 
- dest=['Patient' filesp subj2 '.nii']
+ dest=['Patient' filesep subj2 '.nii']
 end;
 movefile(file_rest{1},dest)
 end;
