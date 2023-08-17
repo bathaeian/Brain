@@ -1,5 +1,7 @@
 addpath D:\student\research\spm\spm12
 spm fmri
+load('E:\COBRE\Control\smooth.mat')
+load('E:\COBRE\Control\smooth.mat', 'matlabbatch')
 p='E:\COBRE\Control\';
 files = dir([p 'wr*.nii']);
 numFiles = numel(files);
