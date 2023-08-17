@@ -1,11 +1,12 @@
 addpath D:\student\research\spm\spm12
 spm fmri
-
-files = dir('wr*.nii');
+p='E:\COBRE\Control\';
+files = dir([p 'wr*.nii']);
 numFiles = numel(files);
 for i = 1:numFiles
-  if ismember(r,UNI)
+  r=[p files(i).name];
+  if ismember(r,matlabbatch{1,1}.spm.spatial.smooth.data)
         continue
   end
-    UNI = [UNI; r];
+    matlabbatch{1,1}.spm.spatial.smooth.data = [matlabbatch{1,1}.spm.spatial.smooth.data; r];
 end
