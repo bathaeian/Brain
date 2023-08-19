@@ -20,7 +20,7 @@ for i = 1:numFiles
 end;
 
 
-files = dir([p1 'swr*.mat']);
+files = dir([p2 'swr*.mat']);
 figure(1) 
 
 filename = 'FMRI_GIF.gif'; 
