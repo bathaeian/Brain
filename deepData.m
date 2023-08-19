@@ -36,3 +36,23 @@ imwrite(imind,cm,filename,'gif', 'Loopcount',inf); else imwrite(imind,cm,filenam
 end 
 pause(.1) 
 end
+
+p1='E:\COBRE\Patient\';
+p2='E:\COBRE\AllData\10\Patient\';
+files = dir([p1 'swr*.nii']);
+numFiles = numel(files);
+numVol=150/2;
+scanno=10;
+for i = 1:numFiles
+  S = load_untouch_nii([p1 files(i).name]);
+  A = S.img;
+  newImg3=[];
+  k=1;
+  for j=1:2:numVol
+    newImg3(:,:,k)= A(:,:,scanno,j);
+    k=k+1;
+  end  ;
+  newF= strrep(files(i).name,'.nii','.mat'); 
+  save([p2 newF],"newImg3");
+end;
+
