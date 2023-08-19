@@ -1,5 +1,5 @@
 addpath D:\student\research\nifti\elayden-NIfTI-Studio-7f46b61
-
+nifti_studio;
 p1='E:\COBRE\Control\';
 p2='E:\COBRE\AllData\10\Control\';
 files = dir([p1 'swr*.nii']);
