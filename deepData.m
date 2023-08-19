@@ -16,5 +16,5 @@ for i = 1:numFiles
     k=k+1;
   end  ;
   newF= strrep(files(i).name,'.nii','.mat'); 
-  save([p2 newF],newImg3);
+  save([p2 newF],"newImg3");
 end;
