@@ -21,12 +21,12 @@ end;
 
 
 files = dir([p2 'swr*.mat']);
+load([p2 files(1).name], 'newImg3');
 figure(1) 
 
 filename = 'FMRI_GIF.gif'; 
-A= files(1).newImg3;
-NumV=size(A,3);
-for k = 1:NumV imshow(A(:,:,k),[]) 
+NumV=size(newImg3,3);
+for k = 1:NumV imshow(newImg3(:,:,k),[]) 
 drawnow 
 frame = getframe(1); 
 im = frame2im(frame); 
