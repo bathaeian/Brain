@@ -15,5 +15,6 @@ for i = 1:numFiles
     newImg(:,:,k)= A(:,:,scanno,j);
     k=k+1;
   end  ;
-  writematrix(A,[p2 S.name]);
+  newF= strrep(files(i).name,'.nii','.txt'); 
+  writematrix(A,[p2 files(i).name]);
 end;
