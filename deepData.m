@@ -15,4 +15,5 @@ for i = 1:numFiles
     newImg(:,:,k)= A(:,:,scanno,j);
     k++;
   end  ;
+  writematrix(A,[p2 S.name]);
 end;
