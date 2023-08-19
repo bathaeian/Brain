@@ -1,5 +1,10 @@
-fmriDatasetPath = fullfile('AllData','10');
-fmris = imageDatastore(digitDatasetPath,'IncludeSubfolders',true,'LabelSource','foldernames');
+fmriDatasetPath = ['AllData' filesep '10'];
+controlData=fileDatastore(fullfile(fmriDatasetPath ,'Control'),'ReadFcn',@load,'FileExtensions','.mat');
+patientData=fileDatastore(fullfile(fmriDatasetPath ,'Patient'),'ReadFcn',@load,'FileExtensions','.mat');
+cData = transform(controlData,@(data) rearrange_datastore(data));
+pData = transform(patientData,@(data) rearrange_datastore(data));
+trainData=combine(cData,pData);
+fmris = fileDatastore(fmriDatasetPath,'IncludeSubfolders',true,'LabelSource','foldernames');
 labelCount = countEachLabel(fmris);
 numTrainFiles = 750;
 [imdsTrain,imdsValidation] = splitEachLabel(imds,numTrainFiles,'randomize');
