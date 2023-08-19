@@ -12,9 +12,9 @@ for i = 1:numFiles
   newImg3=[];
   k=1;
   for j=1:4:numVol
-    newImg(:,:,k)= A(:,:,scanno,j);
+    newImg3(:,:,k)= A(:,:,scanno,j);
     k=k+1;
   end  ;
-  newF= strrep(files(i).name,'.nii','.txt'); 
-  writematrix(A,[p2 newF]);
+  newF= strrep(files(i).name,'.nii','.mat'); 
+  save([p2 newF],newImg3);
 end;
