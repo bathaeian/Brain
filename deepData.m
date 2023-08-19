@@ -16,5 +16,5 @@ for i = 1:numFiles
     k=k+1;
   end  ;
   newF= strrep(files(i).name,'.nii','.txt'); 
-  writematrix(A,[p2 files(i).name]);
+  writematrix(A,[p2 newF]);
 end;
