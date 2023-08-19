@@ -13,7 +13,7 @@ for i = 1:numFiles
   k=1;
   for j=1:4:numVol
     newImg(:,:,k)= A(:,:,scanno,j);
-    k++;
+    k=k+1;
   end  ;
   writematrix(A,[p2 S.name]);
 end;
