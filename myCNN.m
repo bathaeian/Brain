@@ -1,13 +1,8 @@
 fmriDatasetPath = ['AllData' filesep '10'];
-controlData=fileDatastore(fullfile(fmriDatasetPath ,'Control'),'ReadFcn',@load,'FileExtensions','.mat');
-patientData=fileDatastore(fullfile(fmriDatasetPath ,'Patient'),'ReadFcn',@load,'FileExtensions','.mat');
-cData = transform(controlData,@(data) rearrange_datastore(data));
-pData = transform(patientData,@(data) rearrange_datastore(data));
-trainData=combine(cData,pData);
-fmris = fileDatastore(fmriDatasetPath,'IncludeSubfolders',true,'LabelSource','foldernames');
+fmris = imageDatastore(fmriDatasetPath,'IncludeSubfolders',true,'LabelSource','foldernames',"FileExtensions",".mat","ReadFcn",@(x) matRead(x));
 labelCount = countEachLabel(fmris);
-numTrainFiles = 750;
-[imdsTrain,imdsValidation] = splitEachLabel(imds,numTrainFiles,'randomize');
+numTrainFiles = int32(min(table2array(labelCount(:,2)))*4/5);
+[fmriTrain,fmriValidation] = splitEachLabel(fmris,numTrainFiles,'randomize');
 layers = [
 imageInputLayer([28 28 1])
 convolution2dLayer(3,8,'Padding','same')
@@ -36,3 +31,8 @@ net = trainNetwork(imdsTrain,layers,options);
 YPred = classify(net,imdsValidation);
 YValidation = imdsValidation.Labels;
 accuracy = sum(YPred == YValidation)/numel(YValidation)
+function data = matRead(filename)
+    inp = load(filename);
+    f = fields(inp);
+    data = inp.(f{1});
+end
