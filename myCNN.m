@@ -9,11 +9,11 @@ convolution3dLayer(3,8,'Padding','same')
 batchNormalizationLayer
 reluLayer
 maxPooling3dLayer(2,'Stride',2)
-convolution2dLayer(3,16,'Padding','same')
+convolution3dLayer(3,16,'Padding','same')
 batchNormalizationLayer
 reluLayer
-maxPooling2dLayer(2,'Stride',2)
-convolution2dLayer(3,32,'Padding','same')
+maxPooling3dLayer(2,'Stride',2)
+convolution3dLayer(3,32,'Padding','same')
 batchNormalizationLayer
 reluLayer
 fullyConnectedLayer(10)
@@ -24,7 +24,7 @@ options = trainingOptions('sgdm', ...
 'MaxEpochs',4, ...
 'Shuffle','every-epoch', ...
 'ValidationData',imdsValidation, ...
-'ValidationFrequency',30, ...
+'ValidationFrequency',10, ...
 'Verbose',false, ...
 'Plots','training-progress');
 net = trainNetwork(imdsTrain,layers,options);
