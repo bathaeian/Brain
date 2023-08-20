@@ -5,15 +5,15 @@ numTrainFiles = int32(min(table2array(labelCount(:,2)))*4/5);
 [fmriTrain,fmriValidation] = splitEachLabel(fmris,numTrainFiles,'randomize');
 layers = [
 imageInputLayer([53 63 38])
-convolution3dLayer(3,8,'Padding','same')
+convolution3dLayer([3 3 3],32)
 batchNormalizationLayer
 reluLayer
 maxPooling3dLayer(2,'Stride',2)
-convolution3dLayer(3,16,'Padding','same')
+convolution3dLayer([3 3 3],16)
 batchNormalizationLayer
 reluLayer
 maxPooling3dLayer(2,'Stride',2)
-convolution3dLayer(3,32,'Padding','same')
+convolution3dLayer([3 3 3],8,'Padding','same')
 batchNormalizationLayer
 reluLayer
 fullyConnectedLayer(10)
