@@ -4,11 +4,11 @@ labelCount = countEachLabel(fmris);
 numTrainFiles = int32(min(table2array(labelCount(:,2)))*4/5);
 [fmriTrain,fmriValidation] = splitEachLabel(fmris,numTrainFiles,'randomize');
 layers = [
-imageInputLayer([28 28 1])
-convolution2dLayer(3,8,'Padding','same')
+imageInputLayer([53 63 38])
+convolution3dLayer(3,8,'Padding','same')
 batchNormalizationLayer
 reluLayer
-maxPooling2dLayer(2,'Stride',2)
+maxPooling3dLayer(2,'Stride',2)
 convolution2dLayer(3,16,'Padding','same')
 batchNormalizationLayer
 reluLayer
