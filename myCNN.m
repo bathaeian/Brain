@@ -5,7 +5,7 @@ numTrainFiles = int32(min(table2array(labelCount(:,2)))*4/5);
 [fmriTrain,fmriValidation] = splitEachLabel(fmris,numTrainFiles,'randomize');
 
 layers = [
-image3dInputLayer([53 63 38])
+image3dInputLayer([53 63 38],'Normalization','none','Name','input')
 convolution3dLayer([3 3 3],32)
 reluLayer
 maxPooling3dLayer(2,'Stride',2)
