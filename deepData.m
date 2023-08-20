@@ -56,4 +56,13 @@ for i = 1:numFiles
   newF= strrep(files(i).name,'.nii','.mat'); 
   save([p2 newF],"newImg3");
 end;
-
+nf=max(size(fmris.Files));
+sz = [nf 4];
+varTypes = ["string","int8","int8","int8"];
+varNames = ["name","c1","c2","c3"];
+checkf = table('Size',sz,'VariableTypes',varTypes,'VariableNames',varNames);
+for i=1:nf
+  filename=fmris.Files{i};
+  d=matRead(filename);
+  checkf(i,:) = {filename,size(d,1),size(d,2),size(d,3)};
+end;
