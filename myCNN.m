@@ -16,7 +16,7 @@ maxPooling3dLayer(2,'Stride',2)
 convolution3dLayer([3 3 3],8,'Padding','same')
 batchNormalizationLayer
 reluLayer
-fullyConnectedLayer(10)
+fullyConnectedLayer(2)
 softmaxLayer
 classificationLayer]
 options = trainingOptions('sgdm', ...
