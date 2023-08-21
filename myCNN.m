@@ -1,11 +1,11 @@
 fmriDatasetPath = ['AllData' filesep '10'];
-fmris = image3dDatastore(fmriDatasetPath,'IncludeSubfolders',true,'LabelSource','foldernames',"FileExtensions",".mat","ReadFcn",@(x) matRead(x));
+fmris = imageDatastore(fmriDatasetPath,'IncludeSubfolders',true,'LabelSource','foldernames',"FileExtensions",".mat","ReadFcn",@(x) matRead(x));
 labelCount = countEachLabel(fmris);
 numTrainFiles = int32(min(table2array(labelCount(:,2)))*4/5);
 [fmriTrain,fmriValidation] = splitEachLabel(fmris,numTrainFiles,'randomize');
 
 layers = [
-image3dInputLayer([53 63 38],'Normalization','none','Name','input')
+image3dInputLayer([53 63 38 1],'Normalization','none','Name','input')
 convolution3dLayer([3 3 3],32)
 reluLayer
 maxPooling3dLayer(2,'Stride',2)
@@ -33,5 +33,5 @@ accuracy = sum(YPred == YValidation)/numel(YValidation)
 function data = matRead(filename)
     inp = load(filename);
     f = fields(inp);
-    data = inp.(f{1});
+    data = unit8(inp.(f{1}));
 end
