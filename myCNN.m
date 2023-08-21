@@ -3,7 +3,12 @@ fmris = imageDatastore(fmriDatasetPath,'IncludeSubfolders',true,'LabelSource','f
 labelCount = countEachLabel(fmris);
 numTrainFiles = int32(min(table2array(labelCount(:,2)))*4/5);
 [fmriTrain,fmriValidation] = splitEachLabel(fmris,numTrainFiles,'randomize');
-
+TrainMat=[];
+TrainLab=[];
+for i=1:(numTrainFiles*2)
+    TrainMat(:,:,:,1,i)=matRead(fmriTrain.Files{i});
+    TrainLab(i,1)=fmriTrain.Labels(i);
+end;
 layers = [
 image3dInputLayer([53 63 38 1],'Normalization','none','Name','input')
 convolution3dLayer([3 3 3],32)
