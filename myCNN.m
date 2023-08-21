@@ -13,18 +13,21 @@ layers = [
 image3dInputLayer([53 63 38 1],'Normalization','none','Name','input')
 convolution3dLayer([3 3 3],32)
 reluLayer
-maxPooling3dLayer(2,'Stride',2)
-convolution3dLayer([3 3 3],16)
+maxPooling3dLayer(2,'Stride',1)
+dropoutLayer(0.5) 
+convolution3dLayer([3 3 3],64)
 reluLayer
-maxPooling3dLayer(2,'Stride',2)
-convolution3dLayer([3 3 3],8,'Padding','same')
+maxPooling3dLayer(2,'Stride',1)
+dropoutLayer(0.5) 
+convolution3dLayer([3 3 3],128)
 reluLayer
+dropoutLayer(0.5) 
 fullyConnectedLayer(2)
 softmaxLayer
 classificationLayer]
 options = trainingOptions('sgdm', ...
 'InitialLearnRate',0.01, ...
-'MaxEpochs',4, ...
+'MaxEpochs',10, ...
 'Shuffle','every-epoch', ...
 'ValidationData',fmriValidation, ...
 'ValidationFrequency',10, ...
